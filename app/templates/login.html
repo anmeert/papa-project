@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero is-medium is-primary is-bold">
+    <div class="hero-body">
+       <div>
+            <div class="column is-4 is-offset-4">
+                <h3 class="title has-text-black">PAPA server - Login</h3>
+                <hr class="login-hr">
+
+                <p class="subtitle has-text-black">Please login to proceed.</p>
+
+    <form action="" method="post" novalidate>
+    <div class="box is-mobile">
+        {{ form.hidden_tag() }}
+         <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                     <input name= "email" class="input" type="text" placeholder="example@example.com">
+            {% for error in form.email.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <br>
+        <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+                    <input name= "password" class="input" type="password" placeholder="*********">
+           {% for error in form.password.errors %}
+           <span style="color: red;">[{{ error }}]</span>
+           {% endfor %}
+       </div>
+
+
+            {% for error in form.password.error %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+        <button type='submit' class="button is-warning">Submit</button>
+    </form>
+    <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
+</div>
+</div>
+</div>
+</section>
+
+{% endblock %}
