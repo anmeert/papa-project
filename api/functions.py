@@ -2,7 +2,7 @@
 import os, glob
 
 def generate_pir_file(sequence_26_char, iterator_num):
-    
+
     """
     This function takes an aminoacid string of 26 characters, and a number to name the output
     and generate the pir file against the fiber amyloid sequence. It returns the path of the files as a list.
@@ -27,4 +27,23 @@ def generate_pir_file(sequence_26_char, iterator_num):
         models = glob.glob("./*.pir")
     
         return models
+
+def generate_threading_sequences(sequence_26_char):
+    """
+    This function takes a sequence of 26 characters, and returns a list of threaded sequences around the input.
+    Afterwards, it calls the generate_pir_file function for each threaded sequence, to generate diferent pir alignments.
+    """
+    sequences = [sequence_26_char,
+                "*" + sequence_26_char[:-1],
+                "**" + sequence_26_char[:-2],
+                sequence_26_char[1:] + "*",
+                sequence_26_char[2:] + "**"
+                ]
+
+    index = 1
+    for sequence in sequences:
+        generate_pir_file(sequence, index)
+        index += 1
+    
+    return sequences
 

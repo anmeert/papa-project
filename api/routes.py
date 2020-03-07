@@ -1,6 +1,6 @@
 from api import app
 from flask import Flask, jsonify, abort
-from api.functions import generate_pir_file
+from api.functions import generate_pir_file, generate_threading_sequences
 
 tasks = [
         {
@@ -19,8 +19,8 @@ tasks = [
 
 @app.route('/job/api', methods=['GET'])
 def get_tasks():
-    sequence = generate_pir_file("LKELEESSFRKTFEDYLHNVVFVPRK", 1)
-    return sequence
+    sequence = generate_threading_sequences("LKELEESSFRKTFEDYLHNVVFVPRK")
+    return ("\n").join(sequence)
 
 
 @app.route('/job/api/<int:task_id>', methods=['GET'])
