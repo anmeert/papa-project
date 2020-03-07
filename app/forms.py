@@ -12,10 +12,7 @@ class LoginForm(FlaskForm):
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user is None:
-            raise ValidationError('Email already in use, please use a different one.')
-
-
-
+            raise ValidationError('Incorrect email')
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])

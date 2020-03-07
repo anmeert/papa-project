@@ -19,44 +19,56 @@
                     <input name= "username" class="input" type="text" placeholder="jabril">
             {% for error in form.username.errors %}
             <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+          </div>
 
-            {% endfor %}
-        <p>
-            {{ form.email.label }}<br>
-            {{ form.email(size=32) }}<br>
-            {% for error in form.email.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.adress.label }}<br>
-            {{ form.adress(size=32) }}<br>
-            {% for error in form.adress.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.institution.label }}<br>
-            {{ form.institution(size=32) }}<br>
+          <div class="field">
+               <label class="label">Email</label>
+               <div class="control">
+                       <input name= "email" class="input" type="text" placeholder="example@example.com">
+               {% for error in form.email.errors %}
+               <span style="color: red;">[{{ error }}]</span>
+               {% endfor %}
+          </div>
+
+          <div class="field">
+              <label class="label">Adress</label>
+              <div class="control">
+                      <input name= "adress" class="input" type="text" placeholder="123 Fake St.">
+              {% for error in form.adress.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+              {% endfor %}
+         </div>
+
+         <div class="field">
+            <label class="label">Institution</label>
+            <div class="control">
+                    <input name= "institution" class="input" type="text" placeholder="UB/Universitat de Barcelona">
             {% for error in form.institution.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}<br>
+         </div>
+
+         <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+                    <input name= "password" class="input" type="password" placeholder="********">
             {% for error in form.password.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-        </p>
-        <p>
-            {{ form.password2.label }}<br>
-            {{ form.password2(size=32) }}<br>
+         </div>
+
+         <div class="field">
+            <label class="label">Repeat Password</label>
+            <div class="control">
+                    <input name= "password2" class="input" type="password" placeholder="********">
             {% for error in form.password2.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
+         </div>
+         <br>
+         <button type='submit' class="button is-warning">Register</button>
+
     </form>
     <p>Have an account? <a href="{{ url_for('login') }}">Login!</a></p>
     </div>

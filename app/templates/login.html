@@ -26,18 +26,13 @@
             <label class="label">Password</label>
             <div class="control">
                     <input name= "password" class="input" type="password" placeholder="*********">
-           {% for error in form.password.errors %}
-           <span style="color: red;">[{{ error }}]</span>
-           {% endfor %}
+           {% if password_error == 'Incorrect Password' %}
+           <span style="color: red;">[{{ "Incorrect Password" }}]</span>
+           {% endif %}
        </div>
-
-
-            {% for error in form.password.error %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
             <br>
         <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-        <button type='submit' class="button is-warning">Submit</button>
+        <button type='submit' class="button is-warning">LogIn</button>
     </form>
     <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
 </div>
