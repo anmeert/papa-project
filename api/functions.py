@@ -1,5 +1,32 @@
 # Python
 import os, glob
+from api import api, db
+from datetime import datetime
+from app.models import Job, User, Model, Energy
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+def _insert_new_job(job_id):
+    """
+    WARNING: This is an internal testing function. Will be deleted in production.
+    """
+    job = Job(idJob=job_id, 
+              query="QKLVFFAENVGSNKGAIIGLMVGGVV", 
+              date=datetime.now() ,
+              comments="Vaya chusta", 
+              uniprotid="Q34234", 
+              email="patata@patata.com")
+
+    db.session.add(job)
+    db.session.commit()
+    return None
+
+def _retrieve_job(job_id):
+    """
+    WARNING: This function is for internal testing. Will be deleted in production.
+    """
+
+    print(db.session.query(Job).filter_by(idJob=job_id).one())
 
 def generate_pir_file(sequence_26_char, iterator_num):
 

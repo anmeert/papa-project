@@ -30,6 +30,9 @@ class Job(db.Model):
     uniprotid = db.Column(db.String(6), nullable = True)
     email = db.Column(db.String(45), db.ForeignKey('user.email'), nullable = False)
 
+    def __repr__(self):
+        return '<Job {}>'.format(self.idJob)
+
 class Model(db.Model):
     idModel = db.Column(db.Integer, primary_key=True, nullable=False)
     pdbFile = db.Column(db.String(200), unique = True)

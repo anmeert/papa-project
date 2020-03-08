@@ -1,36 +1,23 @@
-from api import app
+from api import api, db
+from app.models import Job, User, Model, Energy
+from datetime import datetime
 from flask import Flask, jsonify, abort
-from api.functions import generate_pir_file, generate_threading_sequences
+from api.functions import generate_pir_file, generate_threading_sequences, _insert_new_job, _retrieve_job
 
-tasks = [
-        {
-            'model': 1,
-            'FoldX': -75.6,
-            'InterfaceAnalyzer': -347.0, 
-            'ZRANK': -200
-        },
-        {
-            'model': 2,
-            'FoldX': -54.6,
-            'InterfaceAnalyzer': -350, 
-            'ZRANK': -230.5
-        }
-]
 
-@app.route('/job/api', methods=['GET'])
-def get_tasks():
+@api.route('/job/api', methods=['GET'])
+def get():
     sequence = generate_threading_sequences("LKELEESSFRKTFEDYLHNVVFVPRK")
     return ("\n").join(sequence)
 
 
-@app.route('/job/api/<int:task_id>', methods=['GET'])
-def get_task(task_id):
-    task = [task for task in tasks if task['model'] == task_id]
-    if len(task) == 0:
-        abort(404)
-    return jsonify({'task': task[0]})
+@api.route('/jobs/api/<int:job_id>', methods=['GET'])
+def return_job(job_id):
+    #_insert_new_job(job_id)
+    _retrieve_job(1)
+    return ("Job " + str(job_id) + " has been commited!")
 
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    api.run(debug=True)
