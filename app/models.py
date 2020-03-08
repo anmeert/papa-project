@@ -31,7 +31,7 @@ class Job(db.Model):
     email = db.Column(db.String(45), db.ForeignKey('user.email'), nullable = False)
 
     def __repr__(self):
-        return '<Job {}>'.format(self.idJob)
+        return '<Job {}, {}>'.format(self.idJob, self.query)
 
 class Model(db.Model):
     idModel = db.Column(db.Integer, primary_key=True, nullable=False)
