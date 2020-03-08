@@ -1,22 +1,23 @@
 from api import api, db
+import os
 from app.models import Job, User, Model, Energy
 from datetime import datetime
 from flask import Flask, jsonify, abort
 from api.functions import generate_pir_file, generate_threading_sequences, _insert_new_job, _retrieve_job
 
-
-@api.route('/job/api', methods=['GET'])
-def get():
-    sequence = generate_threading_sequences("LKELEESSFRKTFEDYLHNVVFVPRK")
-    return ("\n").join(sequence)
-
-
 @api.route('/jobs/api/<int:job_id>', methods=['GET'])
 def return_job(job_id):
-    #_insert_new_job(job_id)
-    _retrieve_job(1)
-    return ("Job " + str(job_id) + " has been commited!")
 
+    path = os.path.join(os.getcwd(), "api", "JOBS", str(job_id))
+
+    try:
+        os.mkdir(path)
+    except:
+        print ("Path already exists")
+
+    current_job = db.session.query(Job).filter_by(idJob=job_id).one()
+    files = generate_threading_sequences(current_job.query, path)
+    return files
 
 
 if __name__ == '__main__':
