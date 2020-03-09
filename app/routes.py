@@ -81,4 +81,7 @@ def home():
 """
 @app.route('/jobview/<jobid>')
 def jobview(jobid):
-    return render_template('job-view.html', title='Jobview')
+    # get pdb-url by accessing the database with the jobID
+    # right now just link to pdb
+    pdbURL = 'https://files.rcsb.org/download/1R6A.pdb'
+    return render_template('job-view.html', title='Jobview', pdbURL = pdbURL)
