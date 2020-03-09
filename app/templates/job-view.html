@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- This is the title and description of the page -->
+
+
+<!-- access data of database of the index of job, visualize results for job -->
+<section class="section">
+    <div class="container">
+        <h1 class="title">
+            Your job: numOfJob
+        </h1>
+        <p class="subtitle is-5">
+            Here we can explain a little bit more about the job and what information we have.
+        </p>
+
+    </div>
+</section>
+
+<head>
+  
+    <title>Simple integration demo page - Molmil viewer</title>
+  
+    <script>  
+      var molmil_settings = {src: "http://gjbekker.github.io/molmil/"}, canvas;
+  
+      function initViewer() {
+        // wait until Molmil has been properly loaded
+        if (! window.molmil.configBox || ! molmil.configBox.initFinished) {return setTimeout(initViewer, 100);}
+        canvas = document.getElementById("molmilViewer"); 
+        canvas = molmil.createViewer(canvas); // initialize the canvas
+        molmil.loadPDB(canvas.getAttribute("data-pdbid"), null, null, canvas.molmilViewer); // load the entry
+      }
+    </script>
+  </head>
+
+   
+
+
+
+<section id= "jobs" class="section">
+    <section class="container">
+        <div class="columns features is-centered">
+            <div class="column is-4">
+                <div class="card">
+                    <div class="card-image has-text-centered">
+                        <figure class="image is-4by1">
+                            <img alt="Placeholder image">
+                          </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <body onload="initViewer();">
+                                <center>
+                                  <h1 id="mm_title">molmil viewer</h1>
+                                  <h3>Integration test page</h3>
+                                  <span class="molmil_UI_container">
+                                    <canvas id="molmilViewer" data-pdbid="4has" width="600" height="400" style="display: block; border: 1px solid #DDD;"></canvas>
+                                  </span>
+                                </center>
+                              </body>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-4">
+                <div class="card is-shady">
+                    <div class="card-image has-text-centered">
+                        <figure class="image is-4by1">
+                            <img alt="Placeholder image">
+                          </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</section>
+
+  <script src="http://gjbekker.github.io/molmil/molmil.js"></script>
+  <script type='text/javascript' src='pv.min.js'></script>
+<!-- give as an input the index??? of job in job-database 
+so we can access the correct job-data 
+
+the job-entry has a pdb.file that can be visualized with a certain library in different ways.
+
+Return button. -->
+
+{% endblock %}

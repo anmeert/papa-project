@@ -50,3 +50,7 @@ def register():
         login_user(user)
         return redirect(url_for('index'))
     return render_template('register.html', title='Register', form=form)
+
+@app.route('/jobview/<jobid>')
+def jobview(jobid):
+    return render_template('job-view.html', title='Jobview')
