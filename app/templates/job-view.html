@@ -15,7 +15,7 @@
 <section class="section">
     <div class="container">
         <h1 class="title">
-            Your job: numOfJob
+            Your job: '{{jobid}}'
         </h1>
         <p class="subtitle is-5">
             Here we can explain a little bit more about the job and what information we have.
@@ -23,14 +23,24 @@
 
     </div>
 </section>
+
 <section class="section">
-       <!-- Here the viewer is loaded -->
-   <div class="container" id="img_container">
-    <body>
-        <div id=viewer style="height:350px; width:400px;"></div>
-    </body>
-</div>
+    <div class="columns is-vcentered">
+        <div class="column is-half">
+             <!-- Here the viewer is loaded -->
+             <div class="container" id="img_container">
+                <div id=viewer></div>
+                <p><a href='{{pdbURL}}'>Download pdb-file</a></p>
+            </div>
+        <div class="column">
+          <p class="bd-notification is-primary">Second column with more content. Here i would add the energy graphics.</p>
+        </div>
+    </div>
 </section>
+
+
+
+<!-- add a download pdb-file button -->
 
 
 <!-- add the graphs for the energies: Scatterplots -->
@@ -44,27 +54,20 @@
 
 
 
-    function loadMethylTransferase() {
-    // asynchronously load the PDB file for the dengue methyl transferase 
-    // from the server and display it in the viewer.   
+    function loadPDBfile() {
+    // asynchronously load the PDB file from the given link and display it in the viewer.   
     pv.io.fetchPdb( '{{pdbURL}}' , function(structure) {   
     // display the protein as cartoon, coloring the secondary structure    
-    // elements in a rainbow gradient.   
+    // elements in a rainbow gradient.  
     viewer.cartoon('protein', structure, { color : color.byChain() });    
-    viewer.autoZoom();    
-    // there are two ligands in the structure, the co-factor S-adenosyl    
-    // homocysteine and the inhibitor ribavirin-5' triphosphate. They have   
-    // the three-letter codes SAH and RVP, respectively. Let's display them    
-    // with balls and sticks.   
-    var ligands = structure.select({ rnames : ['SAH', 'RVP'] });    
-    viewer.ballsAndSticks('ligands', ligands);    
+    viewer.autoZoom();     
     viewer.centerOn(structure);   
     });    
     }
     
-    // load the methyl transferase once the DOM has finished loading. That's    
+    // load the pdb-file once the DOM has finished loading. That's    
     // the earliest point the WebGL context is available.    
-    document.addEventListener('DOMContentLoaded', loadMethylTransferase);    
+    document.addEventListener('DOMContentLoaded', loadPDBfile);    
     </script>
 
 <script type='text/javascript'>
