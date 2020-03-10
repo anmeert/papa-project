@@ -5,21 +5,21 @@
   <body>
 
     <div class="container welcomemessage">
-      <h1>Hello Eva, this is your Home Page!</h1>
+      <h1>Hello {{ form.User.username }}, this is your Home Page!</h1>
     </div>
 
-
-    <hr>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
-      {% for message in messages %}
-      <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-
+    <div class="flash">
+      <hr>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+    </div>
 
     <div class="container submitmessage">
       <p>Your request has been submitted and it is being processed</p>
@@ -30,8 +30,7 @@
     </div>
 
     <div class="container">
-      <form action="" method="post" novalidate> <!--action empty because it renders the same page, method post to send to backend and novalidate because flask does it-->
-
+      <form action="" method="post" name="proteinseq" novalidate> <!--action empty because it renders the same page, method post to send to backend and novalidate because flask does it-->
         <p class ="title"> Protein Sequence </p>
         <fieldset>
           <p class="subtitle"> Query </p>
@@ -51,31 +50,28 @@
       </form>
     </div>
 
-
-      <section class="jobslist">
-        <h2><label for="jobs">JOBS LIST</label></h2>
-        <div class="note">
-          <p><i>NOTE: jobs will be stored for two weeks</i></p>
-        </div>
-        {% if not jobs %}
-        <div class="nojobs">
-          <p>There are no current jobs</p>
-        </div>
-        {% endif %}
-
-        <div class="table" style="overflow-x:auto;">
-          <table>
-            <tr>
-              <th>Job ID</th><th>Run Date</th><th>Result</th>
-            </tr>
-            {% for job in jobs %}
-            <tr>
-              <td> {{job.idJob}} </td><td> {{job.date}} </td><td> <a href={{url_for('home')}}>Results</a></td>
-            </tr>
-            {% endfor %}
-          </table>
-        </div>
-      </section>
-
+    <div class="container">
+      <p class="title">JOBS LIST</p>
+      <div class="note">
+        <p><i>NOTE: jobs will be stored for two weeks</i></p>
+      </div>
+      {% if not jobs %}
+      <div class="nojobs">
+        <p>There are no current jobs</p>
+      </div>
+      {% endif %}
+      <div class="table" style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Job ID</th><th>Run Date</th><th>Result</th>
+          </tr>
+          {% for job in jobs %}
+          <tr>
+            <td> {{job.idJob}} </td><td> {{job.date}} </td><td> <a href={{url_for('job-view')}}>Results</a></td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
 
   {% endblock %}

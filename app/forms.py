@@ -1,3 +1,4 @@
+from flask_uploads import UploadSet #puede ser este el error
 from flask_wtf import FlaskForm
 from flask import flash
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
@@ -36,23 +37,23 @@ class RegistrationForm(FlaskForm):
         if user is not None:
             raise ValidationError('Email already in use, please use a different one.')
 
-"""
-class proteinseq (FlaskForm):
+#EVA'S CHANGES, NOT COMPLETELY WORKING BUT NOT COMPLAINING MUCH
+class ProteinSeq (FlaskForm):
+    """Define the input elements from the query form"""
 
-    def validate_fasta_query (query):
+    def validate_protein (query):
         #function to validate that query sequence has protein format
         aminoacids = "ACDEFGHIKLNMPQRSTVWY"
         validate = True
         str(query)
         for element in query:
             if element not in aminoacids:
-                flash('Format error, query should be a protein sequence')
+                raise ValidationError('Format error, query should be a protein sequence')
                 validate = False
                 break
         if validate:
             flash('Your query is being processed')
 
-    query = StringField ('QUERY', validators=[DataRequired(), validate_fasta_query("MIAU")])
-    file = FileField('File', validators=[FileRequired(), FileAllowed(['fasta', 'fa', 'txt'], '.fasta .fa or .txt files only!')])
+    query = StringField ('Query', validators=[validate_protein("query")])
+    file = FileField('File', validators=[validate_protein("query"), FileAllowed(['txt'], '.txt files only!')])
     submit = SubmitField ('Submit')
-"""
